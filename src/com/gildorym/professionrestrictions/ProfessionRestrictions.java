@@ -7,7 +7,7 @@ public class ProfessionRestrictions extends JavaPlugin {
 	
 	public void onEnable() {
 		this.saveDefaultConfig();
-		this.registerListeners(new CraftItemListener(this), new PlayerInteractListener(this));
+		this.registerListeners(new CraftItemListener(this), new PlayerInteractListener(this), new InventoryClickListener(this));
 	}
 	
 	private void registerListeners(Listener... listeners) {
