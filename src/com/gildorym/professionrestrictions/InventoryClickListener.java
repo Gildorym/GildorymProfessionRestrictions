@@ -27,7 +27,7 @@ public class InventoryClickListener implements Listener {
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
 		if (event.getInventory().getType() == InventoryType.FURNACE) {
-			if (event.getSlotType() == SlotType.CRAFTING) {
+			if (event.getSlotType() == SlotType.CONTAINER) {
 				if (event.isLeftClick()) {
 					if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
 						BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
@@ -45,7 +45,7 @@ public class InventoryClickListener implements Listener {
 					}
 				}
 			}
-			if (event.getSlotType() == SlotType.CONTAINER) {
+			if (event.getSlotType() == SlotType.CRAFTING) {
 				if (event.isShiftClick()) {
 					if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
 						BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
