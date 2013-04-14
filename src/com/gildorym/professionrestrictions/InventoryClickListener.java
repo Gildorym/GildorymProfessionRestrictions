@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 
@@ -27,40 +26,16 @@ public class InventoryClickListener implements Listener {
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
 		if (event.getInventory().getType() == InventoryType.FURNACE) {
-			if (event.getSlotType() == SlotType.CONTAINER) {
-				if (event.isLeftClick()) {
-					if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
-						BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
-						CharacterProfession profession = basicChar.professions.get(event.getWhoClicked().getName());
-						if (profession != null) {
-							if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
-								if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())
-										&& !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).getId())) {
-									event.setCancelled(true);
-								}
-							}
-						} else {
-							event.setCancelled(true);
-						}
+			if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
+				BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
+				CharacterProfession profession = basicChar.professions.get(event.getWhoClicked().getName());
+				if (profession != null) {
+					if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())
+							&& !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).getId())) {
+						event.setCancelled(true);
 					}
-				}
-			}
-			if (event.getSlotType() == SlotType.CRAFTING) {
-				if (event.isShiftClick()) {
-					if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
-						BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
-						CharacterProfession profession = basicChar.professions.get(event.getWhoClicked().getName());
-						if (profession != null) {
-							if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
-								if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())
-										&& !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).getId())) {
-									event.setCancelled(true);
-								}
-							}
-						} else {
-							event.setCancelled(true);
-						}
-					}
+				} else {
+					event.setCancelled(true);
 				}
 			}
 		}
