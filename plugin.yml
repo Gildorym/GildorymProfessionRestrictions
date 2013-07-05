@@ -1,4 +1,4 @@
-name: ProfessionRestrictions
+name: GildorymProfessionRestrictions
 author: Lucariatias
-version: 1.0.1
-main: com.gildorym.professionrestrictions.ProfessionRestrictions
+version: 1.0.2
+main: com.gildorymrp.professionrestrictions.GildorymProfessionRestrictions
