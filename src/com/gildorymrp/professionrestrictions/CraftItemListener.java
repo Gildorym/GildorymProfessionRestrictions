@@ -1,25 +1,25 @@
-package com.gildorym.professionrestrictions;
+package com.gildorymrp.professionrestrictions;
 
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 
-import com.gildorym.basicchar.BasicChar;
-import com.gildorym.basicchar.CharacterProfession;
+import com.gildorymrp.gildorymclasses.CharacterProfession;
+import com.gildorymrp.gildorymclasses.GildorymClasses;
 
 public class CraftItemListener implements Listener {
 	
-	private ProfessionRestrictions plugin;
+	private GildorymProfessionRestrictions plugin;
 
-	public CraftItemListener(ProfessionRestrictions plugin) {
+	public CraftItemListener(GildorymProfessionRestrictions plugin) {
 		this.plugin = plugin;
 	}
 	
 	@EventHandler
 	public void onCraftItem(CraftItemEvent event) {
-		BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
-		CharacterProfession profession = basicChar.professions.get(event.getViewers().get(0).getName());
+		GildorymClasses gildorymClasses = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
+		CharacterProfession profession = gildorymClasses.professions.get(event.getViewers().get(0).getName());
 		if (profession != null) {
 			if (event.getViewers().get(0).getGameMode() != GameMode.CREATIVE) {
 				if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".craft").contains(event.getRecipe().getResult().getType().toString())

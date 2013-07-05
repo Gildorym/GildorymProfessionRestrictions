@@ -1,4 +1,4 @@
-package com.gildorym.professionrestrictions;
+package com.gildorymrp.professionrestrictions;
 
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
@@ -6,21 +6,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import com.gildorym.basicchar.BasicChar;
-import com.gildorym.basicchar.CharacterProfession;
+import com.gildorymrp.gildorymclasses.CharacterProfession;
+import com.gildorymrp.gildorymclasses.GildorymClasses;
 
 public class PlayerInteractListener implements Listener {
 
-	private ProfessionRestrictions plugin;
+	private GildorymProfessionRestrictions plugin;
 	
-	public PlayerInteractListener(ProfessionRestrictions plugin) {
+	public PlayerInteractListener(GildorymProfessionRestrictions plugin) {
 		this.plugin = plugin;
 	}
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
-		BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
-		CharacterProfession profession = basicChar.professions.get(event.getPlayer().getName());
+		GildorymClasses gildorymClasses = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
+		CharacterProfession profession = gildorymClasses.professions.get(event.getPlayer().getName());
 		if (profession != null) {
 			if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
 				if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".use").contains(event.getPlayer().getItemInHand().getType().toString())

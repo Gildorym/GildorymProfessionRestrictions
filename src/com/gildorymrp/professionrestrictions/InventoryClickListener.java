@@ -1,4 +1,4 @@
-package com.gildorym.professionrestrictions;
+package com.gildorymrp.professionrestrictions;
 
 import java.util.Iterator;
 
@@ -12,14 +12,14 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 
-import com.gildorym.basicchar.BasicChar;
-import com.gildorym.basicchar.CharacterProfession;
+import com.gildorymrp.gildorymclasses.CharacterProfession;
+import com.gildorymrp.gildorymclasses.GildorymClasses;
 
 public class InventoryClickListener implements Listener {
 	
-	private ProfessionRestrictions plugin;
+	private GildorymProfessionRestrictions plugin;
 	
-	public InventoryClickListener(ProfessionRestrictions plugin) {
+	public InventoryClickListener(GildorymProfessionRestrictions plugin) {
 		this.plugin = plugin;
 	}
 	
@@ -27,7 +27,7 @@ public class InventoryClickListener implements Listener {
 	public void onInventoryClick(InventoryClickEvent event) {
 		if (event.getInventory().getType() == InventoryType.FURNACE) {
 			if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
-				BasicChar basicChar = (BasicChar) plugin.getServer().getPluginManager().getPlugin("BasicChar");
+				GildorymClasses basicChar = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
 				CharacterProfession profession = basicChar.professions.get(event.getWhoClicked().getName());
 				if (profession != null) {
 					if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())

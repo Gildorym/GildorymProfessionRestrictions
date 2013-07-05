@@ -1,9 +1,9 @@
-package com.gildorym.professionrestrictions;
+package com.gildorymrp.professionrestrictions;
 
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ProfessionRestrictions extends JavaPlugin {
+public class GildorymProfessionRestrictions extends JavaPlugin {
 	
 	public void onEnable() {
 		this.saveDefaultConfig();
