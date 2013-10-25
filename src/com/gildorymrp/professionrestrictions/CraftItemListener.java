@@ -9,27 +9,23 @@ import com.gildorymrp.gildorymclasses.CharacterProfession;
 import com.gildorymrp.gildorymclasses.GildorymClasses;
 
 public class CraftItemListener implements Listener {
-	
+
 	private GildorymProfessionRestrictions plugin;
 
 	public CraftItemListener(GildorymProfessionRestrictions plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	@EventHandler
 	public void onCraftItem(CraftItemEvent event) {
 		GildorymClasses gildorymClasses = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
 		CharacterProfession profession = gildorymClasses.professions.get(event.getViewers().get(0).getName());
-		if (profession != null) {
-			if (event.getViewers().get(0).getGameMode() != GameMode.CREATIVE) {
-				if (!plugin.getConfig().getStringList("default.craft").contains(event.getRecipe().getResult().getType().toString())){
-					if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".craft").contains(event.getRecipe().getResult().getType().toString())) {
-						event.setCancelled(true);
-					}
+		if (event.getViewers().get(0).getGameMode() != GameMode.CREATIVE) {
+			if (!plugin.getConfig().getStringList("default.craft").contains(event.getRecipe().getResult().getType().toString())){
+				if (profession == null || !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".craft").contains(event.getRecipe().getResult().getType().toString())) {
+					event.setCancelled(true);
 				}
 			}
-		} else {
-			event.setCancelled(true);
 		}
 	}
 
