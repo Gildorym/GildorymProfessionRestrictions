@@ -30,9 +30,10 @@ public class InventoryClickListener implements Listener {
 				GildorymClasses basicChar = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
 				CharacterProfession profession = basicChar.professions.get(event.getWhoClicked().getName());
 				if (profession != null) {
-					if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())
-							&& !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).getId())) {
-						event.setCancelled(true);
+					if (!plugin.getConfig().getStringList("default.smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())){
+						if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())) {
+							event.setCancelled(true);
+						}
 					}
 				} else {
 					event.setCancelled(true);

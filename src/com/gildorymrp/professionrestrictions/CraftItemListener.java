@@ -22,9 +22,10 @@ public class CraftItemListener implements Listener {
 		CharacterProfession profession = gildorymClasses.professions.get(event.getViewers().get(0).getName());
 		if (profession != null) {
 			if (event.getViewers().get(0).getGameMode() != GameMode.CREATIVE) {
-				if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".craft").contains(event.getRecipe().getResult().getType().toString())
-						&& !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".craft").contains(event.getRecipe().getResult().getTypeId())) {
-					event.setCancelled(true);
+				if (!plugin.getConfig().getStringList("default.craft").contains(event.getRecipe().getResult().getType().toString())){
+					if (!plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".craft").contains(event.getRecipe().getResult().getType().toString())) {
+						event.setCancelled(true);
+					}
 				}
 			}
 		} else {
