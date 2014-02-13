@@ -32,7 +32,7 @@ public class PlayerInteractEntityListener implements Listener {
 						} else {
 							message += " without the correct training!";
 						}
-						event.getPlayer().sendMessage(message);
+						//event.getPlayer().sendMessage(message);
 					}
 				}
 			}
