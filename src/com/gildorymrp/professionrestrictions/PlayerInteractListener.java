@@ -36,7 +36,7 @@ public class PlayerInteractListener implements Listener {
 							} else {
 								message += " without the correct training!";
 							}
-							event.getPlayer().sendMessage(message);
+							//event.getPlayer().sendMessage(message);
 						}
 					}
 				} else {
@@ -49,7 +49,7 @@ public class PlayerInteractListener implements Listener {
 							} else {
 								message += " without the correct training!";
 							}
-							event.getPlayer().sendMessage(message);
+							//event.getPlayer().sendMessage(message);
 						}
 					}
 				}
@@ -65,7 +65,7 @@ public class PlayerInteractListener implements Listener {
 						} else {
 							message += " without the correct training!";
 						}						
-						event.getPlayer().sendMessage(message);
+						//event.getPlayer().sendMessage(message);
 					}
 				}
 			}
