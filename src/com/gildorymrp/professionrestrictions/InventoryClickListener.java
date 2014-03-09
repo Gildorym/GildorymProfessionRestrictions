@@ -12,8 +12,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.Recipe;
 
+import com.gildorymrp.gildorym.Gildorym;
 import com.gildorymrp.gildorymclasses.CharacterProfession;
-import com.gildorymrp.gildorymclasses.GildorymClasses;
 
 public class InventoryClickListener implements Listener {
 
@@ -27,10 +27,10 @@ public class InventoryClickListener implements Listener {
 	public void onInventoryClick(InventoryClickEvent event) {
 		if (event.getInventory().getType() == InventoryType.FURNACE) {
 			if (event.getWhoClicked().getGameMode() != GameMode.CREATIVE) {
-				GildorymClasses basicChar = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
-				CharacterProfession profession = basicChar.professions.get(event.getWhoClicked().getName());
+				Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+				CharacterProfession[] professions = gildorym.getActiveCharacters().get(event.getWhoClicked().getName()).getProfessions();
 				if (!plugin.getConfig().getStringList("default.smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())){
-					if (profession == null || !plugin.getConfig().getStringList(profession.toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())) {
+					if (professions == null || !plugin.getConfig().getStringList(professions[0].toString().toLowerCase() + ".smelt").contains(this.getFurnaceResult(event.getCurrentItem().getType()).toString())) {
 						event.setCancelled(true);
 					}
 				}

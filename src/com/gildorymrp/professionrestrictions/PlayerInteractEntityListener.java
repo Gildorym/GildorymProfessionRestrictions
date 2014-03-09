@@ -1,13 +1,14 @@
 package com.gildorymrp.professionrestrictions;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+import com.gildorymrp.gildorym.Gildorym;
 import com.gildorymrp.gildorymclasses.CharacterProfession;
-import com.gildorymrp.gildorymclasses.GildorymClasses;
 
 public class PlayerInteractEntityListener implements Listener {
 
@@ -20,27 +21,26 @@ public class PlayerInteractEntityListener implements Listener {
 
 	@EventHandler
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-		GildorymClasses gildorymClasses = (GildorymClasses) plugin.getServer().getPluginManager().getPlugin("GildorymClasses");
-		CharacterProfession profession = gildorymClasses.professions.get(event.getPlayer().getName());
+		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+		CharacterProfession[] professions = gildorym.getActiveCharacters().get(event.getPlayer().getName()).getProfessions();
 		String prof = "default";
 		
-		if (profession != null) {
-			prof = profession.toString();
-			
-		}
+		if (professions != null) {
+			prof = professions[0].toString();
+		} 
+		
 		if (event.getPlayer().getGameMode() != GameMode.CREATIVE) {
 			if (event.getPlayer().getItemInHand().getType() != Material.AIR){
 				if (!plugin.getConfig().getStringList("default.entity").contains(event.getRightClicked().getType().toString())){
 					if (!plugin.getConfig().getStringList(prof.toLowerCase() + ".entity").contains(event.getRightClicked().getType().toString())) {
 						event.setCancelled(true);
 						String message = "You can not interact with " + event.getRightClicked().getType().toString();
-						if (profession != null) {
-							message += " as a " + profession.toString();
+						if (professions != null) {
+							message += " as a " + professions[0].toString();
 						} else {
 							message += " without the correct training!";
 							event.getPlayer().sendMessage(message);
 						}
-						//event.getPlayer().sendMessage(message);
 					}
 				}
 			}

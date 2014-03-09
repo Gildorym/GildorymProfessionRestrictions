@@ -2,3 +2,4 @@ name: GildorymProfessionRestrictions
 authors: [Lucariatias, melodichand, Hohahihehu]
 version: 2.0.0
 main: com.gildorymrp.professionrestrictions.GildorymProfessionRestrictions
+depend: [Gildorym]
